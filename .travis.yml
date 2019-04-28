@@ -1,6 +1,10 @@
 language: php
 services: docker
-
+branches:
+  only:
+    - master
+    - development
+    
 env:
   - DOCKER_COMPOSE_VERSION=1.17.1
 
