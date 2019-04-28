@@ -1,6 +1,11 @@
 CREATE DATABASE demo;
 USE demo;
 
+
+-- The following table is an eample table that you might use for a 
+-- PHP mysql user management system and has *NOTHING* to do with myql
+-- authentication
+
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
