@@ -15,5 +15,6 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 script:
+  - sh ./scripts/wait.sh
   - phpunit test.php
 
