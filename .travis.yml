@@ -15,6 +15,6 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 script:
-  - until nc -z localhost 3306; do sleep 0.5 ; done
+  - until nc -z localhost 80; do sleep 0.5 ; done
   - phpunit test.php
 
