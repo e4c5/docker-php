@@ -17,6 +17,6 @@ install:
   - sudo mv docker-compose /usr/local/bin
 
 script:
-  - phpunit test.php
+  - sh scripts/setup.sh
 
 
