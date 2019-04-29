@@ -1,5 +1,7 @@
 language: php
+sudo: required
 services: docker
+
 branches:
   only:
     - master
@@ -8,15 +10,13 @@ branches:
 env:
   - DOCKER_COMPOSE_VERSION=1.17.1
 
-before_install:
+install:
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  
-install:
   - sudo /etc/init.d/mysql stop
-  - sudo docker-compose up -d
+  - sudo docker-compose up --build -d
 
 script:
   - until nc -z localhost 80; do sleep 5; echo '.';  done
