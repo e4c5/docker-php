@@ -17,9 +17,7 @@ services:
            - ./php.ini://usr/local/etc/php/php.ini
         links:
            - mysql
-        depends_on:
-           - nginx
-           - mysql
+
     nginx:
         image: nginx
         ports:
