@@ -7,7 +7,8 @@ sleep 9
 sudo docker ps
 #IP=$(sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dockerphp_nginx_1)
 #echo $IP
+sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dockerphp_php_1
 #sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dockerphp_nginx_1
 #until nc -z localhost 80; do sleep 5; echo '.';  done
-sleep 9
+
 phpunit scripts/test.php localhost

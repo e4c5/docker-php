@@ -5,7 +5,8 @@ class FetchTests extends TestCase {
 	public function test_url() {
    
 	    for($i = 0 ; $i < 12 ; $i++) {
-    	        $data = file_get_contents("http://localhost/demo.php");
+                echo ".";
+    	        $data = @file_get_contents("http://localhost/demo.php");
     	        if(strstr($data, "prof")) {
                     break;
                 }
