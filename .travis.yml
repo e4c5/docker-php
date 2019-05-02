@@ -1,14 +1,20 @@
 language: php
 sudo: required
-services: docker
 
 branches:
   only:
     - master
     - development
-    
+    - travis
 env:
   - DOCKER_COMPOSE_VERSION=1.17.1
+
+pre_install:
+ - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+ - sudo apt-get update
+ - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+ - sudo /etc/init.d/docker start
 
 install:
   - sudo rm /usr/local/bin/docker-compose
@@ -16,10 +22,11 @@ install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
   - sudo /etc/init.d/mysql stop
-  - sudo docker-compose up --build -d
-
+  - sudo docker-compose build
+  - sudo docker-compose up -d
+  - sleep 9
+  - sudo docker ps
+  - sudo docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dockerphp_nginx_1
+#  - docker exec -it dockerphp_mysql_1 mysql -e "update user set plugin = 'caching_sha2_password' where user='root';" 
 script:
-  - until nc -z localhost 80; do sleep 5; echo '.';  done
-  - phpunit test.php
-
-
+  - php scripts/test.php
