@@ -6,7 +6,7 @@ class FetchTests extends TestCase {
    
 	    for($i = 0 ; $i < 12 ; $i++) {
                 echo ".";
-    	        $data = @file_get_contents("http://localhost/demo.php");
+    	        $data = @file_get_contents("http://localhost/pdo-demo.php");
     	        if(strstr($data, "prof")) {
                     break;
                 }
