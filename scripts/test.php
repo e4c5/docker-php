@@ -8,11 +8,15 @@ class FetchTests extends TestCase {
                 echo ".";
     	        $data = @file_get_contents("http://localhost/pdo-demo.php");
     	        if(strstr($data, "prof")) {
+         
                     break;
                 }
+                else{
+                    echo $data;
+                }
                 sleep(10);
-             }
-    	     $this->assertContains('prof', $data);
+        }
+    	$this->assertContains('prof', $data);
   	}
 }
 ?>
