@@ -1,14 +1,14 @@
 version: '2'
 services:
     mysql:
-        image: mysql
+        image: mysql:8
         ports: 
            - "3306:3306"
         volumes:
            - ./data:/var/lib/mysql
            - ./init:/docker-entrypoint-initdb.d/
         environment:
-           - MYSQL_RANDOM_ROOT_PASSWORD=YES
+           - MYSQL_ROOT_PASSWORD=eip2weeYee3gungo9Uphaev4aXo4ePh8
 
     php:
         build: php
@@ -17,6 +17,7 @@ services:
            - ./php.ini://usr/local/etc/php/php.ini
         links:
            - mysql
+
     nginx:
         image: nginx
         ports:
@@ -25,7 +26,7 @@ services:
         volumes:
           - ./web:/web
           - ./default.conf:/etc/nginx/conf.d/default.conf:ro
-          - /var/log:/var/log
+          - ./var/log:/var/log
           - /tmp:/tmp
           - ./letsencrypt:/letsencrypt"
         links:
@@ -33,6 +34,12 @@ services:
 
 
 # this might take a minute or two to start up the first time.
+
+# Out of the box configuration is to use a predefined mysql root password. You 
+# change the password above look for the MYSQL_ROOT_PASSWORD line or change to
+# using a random password. In that case remove the MYSQL_ROOT_PASSWOR directive
+# and instead add MYSQL_RANDOM_ROOT_PASSWORD=yes 
+
 # after start up execute docker ps to find the container name
 # for mysql. Use that name to execute the following command
 #
@@ -45,3 +52,4 @@ services:
 # docker exec -it phpmysql_mysql_1 mysql -uroot -p
 
 # to connect to the server.
+
